@@ -1,0 +1,163 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Quản Lý Lỗi Xử lý kỷ luật</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Lỗi xử lý kỷ luật </a></li>
+            <li class="breadcrumb-item active">Tìm kiếm lỗi xử lý kỷ luật </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="mb-0 text-white">Tìm kiếm lỗi xử lý kỷ luật</h4>
+            </div>
+            <div class="card-body">
+                <form action="#" class="form-horizontal" (ngSubmit)="onSubmitSearch()">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Đơn vị phát sinh:</label>
+                                    <div class="col-lg-7">
+                                        <select class="form-control custom-select" name="unit_incurred" required
+                                            [(ngModel)]="formSeekDisciplinaryError.detail_issue.unit_incurred">
+                                            <option [ngValue]="branch">Tất Cả</option>
+                                            <option *ngFor="let item of list_unit_incurred" [ngValue]="item">
+                                                {{item.branch_code}}-{{item.branch_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Trạng thái duyệt:</label>
+                                    <div class="col-lg-7">
+                                        <select class="form-control custom-select" name="approved"
+                                        [(ngModel)]="formSeekDisciplinaryError.approved">
+                                            <option *ngFor="let item of status_approved" [ngValue]="item">{{item.contents}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Ngày ghi nhận:</label>
+                                    <div class="col-lg-7">
+                                        <input type="date" class="form-control" name="date_of_record"
+                                        [(ngModel)]="formSeekDisciplinaryError.date_of_record">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label class="control-label text-right col-lg-5">Tình Trạng khắc Phục:</label>
+                                    <div class="col-lg-7">
+                                        <select class="form-control custom-select" name="status"
+                                        [(ngModel)]="formSeekDisciplinaryError.issue_correction_status.status">
+                                            <option *ngFor="let item of issue_correction_status" [ngValue]="item">{{item.contents}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5"></label>
+                                    <div class="col-md-offset-6 col-md-6">
+                                        <button type="submit" class="btn btn-success">Tìm Kiếm</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label class="control-label text-right col-lg-5"></label>
+                                    <div class="col-md-offset-6 col-md-6">
+                                        <button type="button" class="btn btn-success" (click)="add()">Thêm mới</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form action="#" class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="p-2 rounded-title">Danh sách Tìm kiếm Lỗi xử lý kỷ luật</h3>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover no-wrap"
+                                    style="border-collapse: inherit;">
+                                        <thead>
+                                            <tr style="text-transform: capitalize;">
+                                                <th>Mã ghi nhận</th>
+                                                <th>Đơn vị yêu cầu</th>
+                                                <th>Ngày sự vụ</th>
+                                                <th>Lỗi xử lý kỷ luật</th>
+                                                <th>Lỗi chi tiết</th>
+                                                <th>Đơn vị phát sinh sự vụ</th>
+                                                <th>Ngày ghi nhận</th>
+                                                <th>Trạng thái duyệt</th>
+                                                <th>TT xử lý kỷ luật</th>
+                                                <th>TT khắc phục</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of dataTable">
+                                                <td style="text-align: center;">{{item.code}}</td>
+                                                <td style="text-align: center;">{{item.unit_request.branch_name}}</td>
+                                                <td style="text-align: center;">{{item.detail_issue.date_incurred | date: 'dd/MM/yyyy'}}</td>
+                                                <td style="text-align: center;">{{item.error.code}}</td>
+                                                <td style="text-align: center;">{{item.description}}</td>
+                                                <td style="text-align: center;">{{item.detail_issue.unit_incurred.branch_name}}</td>
+                                                <td style="text-align: center;">{{item.date_of_record | date: 'dd/MM/yyyy'}}</td>
+                                                <td style="text-align: center;">{{item.approved.contents}}</td>
+                                                <td style="text-align: center;">
+                                                    <button *ngIf = "item.approved.code == 0 && item.disciplinary_status?.approved?.code != 0" type="button" class="btn waves-effect waves-light btn-danger mb-1" title="Lỗi Xử lý Kỷ luật này Chưa Duyệt ghi nhận, không cho phép cập nhật tình trạng Xử lý kỷ luật.">Xử lý</button>
+                                                    <button *ngIf = "item.disciplinary_status?.approved?.code == 1" type="button" class="btn waves-effect waves-light btn-danger mb-1" title="Lỗi tuân thủ này Đã Duyệt tình trạng xử lý kỷ luật, không cho phép cập nhật tình trạng xử lý kỷ luật.">Xử lý</button>
+                                                    <button *ngIf = "(item.approved.code == 1 && item.disciplinary_status?.approved?.code != 1)" type="button" class="btn waves-effect waves-light btn-warning  mb-1" (click)="AddDisciplinaryStatus(item)">Xử lý</button>
+                                                </td>
+                                                
+                                                <!-- <td style="text-align: center;">
+                                                    <button *ngIf = "item.approved.code == 0 && item.issue_correction_status?.approved?.code != 1" type="button" class="btn waves-effect waves-light btn-danger mb-1" title="Lỗi Xử lý Kỷ luật này Chưa Duyệt ghi nhận, không cho phép cập nhật tình trạng Xử lý kỷ luật.">Xử lý</button>
+                                                    <button *ngIf = "item.issue_correction_status?.approved?.code == 1" type="button" class="btn waves-effect waves-light btn-danger mb-1" title="Lỗi tuân thủ này Đã Duyệt tình trạng xử lý kỷ luật, không cho phép cập nhật tình trạng xử lý kỷ luật.">Xử lý</button>
+                                                    <button *ngIf = "(item.approved.code == 1 && item.issue_correction_status?.approved?.code != 1)" type="button" class="btn waves-effect waves-light btn-warning  mb-1" (click)="AddDisciplinaryStatus(item)">Xử lý</button>
+                                                </td> -->
+                                                <td style="text-align: center;">
+                                                    <button *ngIf = "(item.approved.code == 1 && item.issue_correction_status?.approved?.code != 0 && item.issue_correction_status?.approved != null)" type="button" class="btn waves-effect waves-light btn-danger  mb-1" title="Lỗi Xử lý Kỷ luật này Đã Duyệt tình trạng khắc phục sự vụ, không cho phép cập nhật tình trạng Khắc phục sự vụ.">Khắc phục</button>
+                                                    <button *ngIf = "item.approved.code == 0" type="button" class="btn waves-effect waves-light btn-danger  mb-1" title="Lỗi Xử lý Kỷ luật này Chưa Duyệt ghi nhận, không cho phép cập nhật tình trạng Khắc phục sự vụ.">Khắc phục</button>
+                                                    <button *ngIf = "(item.approved.code == 1 && item.issue_correction_status?.approved?.code != 1)" type="button" class="btn waves-effect waves-light btn-info  mb-1" (click) = "AddIssueCorrectionStatus(item)">Khắc phục</button>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <button *ngIf = "item.approved.code == 1" title="Lỗi Xử lý Kỷ luật này đã Duyệt, không cho phép Chỉnh sửa." class="btn btn-ligth"><i class="fa fa-edit"></i></button>
+                                                    <button *ngIf = "item.approved.code == 0" class="btn btn-primary" (click)="edit(item)"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-success" (click)="view(item)"><i class="fa fa-eye"></i></button>
+                                                    <button *ngIf = "item.approved.code == 1" class="btn btn-light"
+                                                    title="Lỗi Xử lý Kỷ luật này đã Duyệt, không cho phép Xóa." ><i class="fa fa-trash"></i></button>
+                                                    <button *ngIf = "item.approved.code == 0" class="btn btn-outline-danger"
+                                                    title="Hủy" mwlConfirmationPopover popoverTitle="Xác Nhận"
+                                                    popoverMessage="Bạn chắc chắn muốn hủy thông tin này?" placement="left"
+                                                    cancelText="Không" confirmText="Có" (confirm)="onRemove(item)"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #customLoadingTemplate>
+</ng-template>
+
+<ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }" [template]="customLoadingTemplate">
+</ngx-loading>

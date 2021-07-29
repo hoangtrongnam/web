@@ -1,0 +1,51 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<!-- <aside class="left-sidebar"> -->
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <!-- <li class="nav-small-cap">QUẢN LÝ THẺ QUÀ TẶNG</li> -->
+                <li *ngFor="let menu of menus" routerLinkActive="active" >
+                    <a routerLinkActive="active" class="has-arrow waves-effect waves-dark" href="javascript:void(0)" *ngIf="menu.menus && menu.menus?.length > 0" aria-expanded="true">
+                        <i class="fa fa-bars"></i>
+                        <span class="hide-menu">{{menu.name}}</span>
+                    </a>
+                    <ul aria-expanded="true" class="collapse" routerLinkActive="in" *ngIf="menu.menus?.length > 0">
+                        <ng-container *ngFor="let menu_chir of menu.menus">
+                            <li>
+                                <a *ngIf="menu_chir.menus && menu_chir.menus?.length === 0"
+                                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                    routerLink="{{menu_chir.url.toLowerCase()}}"  style="white-space: normal;">{{menu_chir.name}}</a>
+
+                                <a *ngIf="menu_chir.menus && menu_chir.menus?.length > 0" href="javascript:void(0)"
+                                    class="has-arrow"  style="white-space: normal;">{{menu_chir.name}}</a>
+                                <ul *ngIf="menu_chir.menus && menu_chir.menus?.length > 0" aria-expanded="false"
+                                    class="collapse">
+                                    <li *ngFor="let menu_chir_3 of menu_chir.menus" ><a routerLinkActive="active" style="white-space: normal;"
+                                            routerLink="{{menu_chir_3.url.toLowerCase()}}">{{menu_chir_3.name}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ng-container>
+                    </ul>
+                    <a style="font-size: 1.2em" class="has-arrow" *ngIf="menu.menus?.length === 0" href="javascript:void(0)" routerLinkActive="active" routerLink="{{menu.url.toLowerCase()}}">
+                        <i style="font-size: 1.2em" [className]="menu.icon"></i>
+                        <span class="hide-menu">{{menu.name}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+    <!-- Bottom points-->
+    <div class="sidebar-footer">
+    </div>
+    <!-- End Bottom points-->
+<!-- </aside> -->
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

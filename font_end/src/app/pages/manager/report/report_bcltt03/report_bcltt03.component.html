@@ -1,0 +1,70 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Quản Lý Báo Cáo</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Báo cáo </a></li>
+            <li class="breadcrumb-item active">Báo Cáo BCLTT03 </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="mb-0 text-white">Xuất báo cáo Danh sách CBNV bị xử lý kỷ luật</h4>
+            </div>
+            <div class="card-body">
+                <form action="#" class="form-horizontal" (ngSubmit)="ExportBCLTT03()">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Đơn vị phát sinh:</label>
+                                    <div class="col-lg-7">
+                                        <select class="form-control custom-select" name="branch" required
+                                            [(ngModel)]="formReport.branch">
+                                            <option [ngValue]="branch">Tất cả</option>
+                                            <option *ngFor="let item of list_unit_incurred" [ngValue]="item">
+                                                {{item.branch_code}}-{{item.branch_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Từ Ngày:</label>
+                                    <div class="col-lg-7">
+                                        <input type="date" class="form-control" name="startDate"
+                                        [(ngModel)]="formReport.startDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Đến Ngày:</label>
+                                    <div class="col-lg-7">
+                                        <input type="date" class="form-control" name="endDate"
+                                        [(ngModel)]="formReport.endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5"></label>
+                                    <div class="col-md-offset-6 col-md-6">
+                                        <button type="submit" class="btn btn-danger" (click)="ExportBCLTT03()">Export BCLTT03</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #customLoadingTemplate>
+</ng-template>
+
+<ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }" [template]="customLoadingTemplate">
+</ngx-loading>

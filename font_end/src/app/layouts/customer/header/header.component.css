@@ -1,0 +1,12 @@
+.say-hello {
+    animation:blinkingText 4s infinite;
+    animation-delay: 4s;
+    animation-timing-function: linear;
+}
+@keyframes blinkingText{
+    0%{     color: rgb(246, 248, 131);    }
+    50%{    color: transparent; }
+    50%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: rgb(162, 245, 8);    }
+}

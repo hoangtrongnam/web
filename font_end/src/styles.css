@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+body { 
+    /* color: rgba(0,0,0,.87); */
+    color: black;
+    font-weight: 300;
+    font-size: 15px;
+    zoom: 85%;
+ }
+
+table tr th {
+    text-align: center;
+}
+.table th, .table thead th {
+    font-weight: 600;
+}
+
+.sidebar-nav ul li a.active {
+    color: #26c6da;
+    font-weight: 700;
+}
+
+.ng-select.ng-select-disabled>.ng-select-container {
+    background-color: #f0f2f4;
+    color: #67757c;
+    
+}
+
+.ng-select.ng-select-single .ng-select-container {
+height: 37px;
+}
+ 
+.ng-select.form-control {
+padding: 1px;
+}
+ 
+.ng-select.form-control.is-invalid .ng-select-container {    
+border: none;
+}
+ 
+.ng-select.form-control .ng-select-container {
+border: none;
+}
+

@@ -1,0 +1,49 @@
+<div id="main-wrapper">
+    <div class="container-fluid">
+        <section id="wrapper">
+            <div class="login-register">
+                <div class="login-box card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-control-line" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                            <a href="javascript:void(0)" class="text-center db"><img src="./assets/images/logo.svg" alt="Logo"></a>
+                            <h4 class="mt-4 text-center font-weight-bold text-uppercase" style="color: #0066b2;">
+                                HỆ THỐNG QUẢN LÝ LỖI TUÂN THỦ
+                            </h4>
+                            <div class="form-group row m-t-40" [ngClass]="{ 'has-danger': submitted && f.username.errors }">
+                                <div class="col-12 my-position-relative">
+                                    <i class="fa fa-user my-icon" [ngClass]="{ 'bg-danger': submitted && f.username.errors }"></i>
+                                    <input type="text" formControlName="username" placeholder="Tên đăng nhập" class="form-control my-input" />
+                                    <div *ngIf="submitted && f.username.errors">
+                                        <small *ngIf="f.username.errors.required" class="form-control-feedback">Vui lòng
+                                            Nhập tên đăng nhập</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" [ngClass]="{ 'has-danger': submitted && f.password.errors }">
+                                <div class="col-12 my-position-relative">
+                                    <i class="fa fa-key my-icon" [ngClass]="{ 'bg-danger': submitted && f.password.errors }"></i>
+                                    <input type="password" formControlName="password" placeholder="Mật khẩu" class="form-control my-input" />
+                                    <div *ngIf="submitted && f.password.errors">
+                                        <small *ngIf="f.password.errors.required" class="form-control-feedback">Vui lòng
+                                            Nhập mật khẩu</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-center m-t-30">
+                                <div class="col-xs-12">
+                                    <button [disabled]="isLoading" type="submit" class="btn btn-danger btn-md btn-block text-uppercase waves-effect waves-light">
+                                        <mat-icon *ngIf="isLoading" class="my-icon-material">
+                                            <mat-spinner color="blue" diameter="20"></mat-spinner>
+                                        </mat-icon>
+                                        Đăng nhập
+                                    </button>
+                                </div>
+                            </div>
+                            <alert></alert>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

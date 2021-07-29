@@ -1,0 +1,283 @@
+<div class="modal-header">
+    <h4 class="modal-title">Tình trạng khắc phục sự vụ</h4>
+    <button type="button" class="close" (click)="onClose()" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+</div>
+<div mat-dialog-content>
+    <form #heroForm="ngForm" class="form-horizontal">
+        <div class="form-body">
+            <h3 class="p-2 rounded-title">Thông tin ghi nhận</h3>
+            <hr class="mt-0 mb-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Mã ghi nhận:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="code" [(ngModel)]="formDisciplinaryError.code"
+                                disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Ngày ghi nhận:</label>
+                        <div class="col-lg-9">
+                            <input type="datetime-local" class="form-control" name="date_of_record"
+                                [(ngModel)]="formDisciplinaryError.date_of_record" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Đơn vị yêu cầu:</label>
+                        <div class="col-lg-9">
+                            <select class="form-control custom-select" name="unit_request" disabled
+                                [(ngModel)]="formDisciplinaryError.unit_request">
+                                <option [ngValue]="formDisciplinaryError.unit_request">
+                                    {{formDisciplinaryError.unit_request.branch_code}}-{{formDisciplinaryError.unit_request.branch_name}}
+                                </option>
+                                <!-- <option *ngFor="let item of list_unit_request" [ngValue]="item">
+                                    {{item.branch_code}}-{{item.branch_name}}</option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Lỗi</label>
+                        <div class="col-lg-9">
+                            <select class="form-control custom-select" name="error" disabled
+                                [(ngModel)]="formDisciplinaryError.error">
+                                <option [ngValue]="formDisciplinaryError.error">
+                                    {{formDisciplinaryError.error.code}}-{{formDisciplinaryError.error.name}}</option>
+                                <option *ngFor="let item of list_error" [ngValue]="item">
+                                    {{item.code}}-{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Chi tiết:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="description"
+                                [(ngModel)]="formDisciplinaryError.description" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="p-2 rounded-title">Chi tiết sự vụ</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Ngày phát
+                                    sinh:</label>
+                                <div class="col-lg-7">
+                                    <input type="datetime-local" class="form-control" name="date_incurred"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.date_incurred" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Đơn vị phát sinh sự vụ:</label>
+                                <div class="col-lg-7">
+                                    <select class="form-control custom-select" name="unit_incurred" disabled
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.unit_incurred">
+                                        <option [ngValue]="formDisciplinaryError.detail_issue.unit_incurred">
+                                            {{formDisciplinaryError.detail_issue.unit_incurred.branch_code}}-{{formDisciplinaryError.detail_issue.unit_incurred.branch_name}}
+                                        </option>
+                                        <option *ngFor="let item of list_unit_incurred" [ngValue]="item">
+                                            {{item.branch_code}}-{{item.branch_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Nguồn cung cấp tin:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="news_sources"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.news_sources" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Mã CIF KH liên quan:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="cif_customer"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.cif_customer" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Họ tên khách hàng:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="full_name_customer"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.full_name_customer" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Số tiền liên quan:</label>
+                                <div class="col-lg-7">
+                                    <input currencyMask class="form-control" name="amount_involved"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.amount_involved" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Số tiền tổ thất:</label>
+                                <div class="col-lg-7">
+                                    <input currencyMask class="form-control" name="loss_of_money"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.loss_of_money" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-5">
+                <h5>Thông tin CBNV liên quan</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover no-wrap"
+                        style="border-collapse: inherit;">
+                        <thead>
+                            <tr>
+                                <th style="width: 70px;">STT</th>
+                                <th style="width: 300px;">Mã nhân viên</th>
+                                <th style="width: 300px;">Họ tên</th>
+                                <th style="width: 300px;">Chức danh</th>
+                                <th style="width: 300px;">Hình thức xử lý kỷ luật</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="jsgrid-alt-row"
+                                *ngFor="let item of formDisciplinaryError.detail_issue.staff_form_of_discipline;index as i">
+                                <td style="width: 70px;text-align: center;">{{1 + i}}</td>
+                                <td style="width: 300px;text-align: center;">{{item.staff.user_code}}
+                                </td>
+                                <td style="width: 300px;text-align: center;">{{item.staff.full_name}}
+                                </td>
+                                <td style="width: 300px;text-align: center;">{{item.staff.titlee}}
+                                </td>
+                                <td style="width: 300px;text-align: center;">
+                                    <input type="text" class="form-control" name="form_of_discipline"
+                                        [(ngModel)]="item.form_of_discipline.form_of_discipline" disabled>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h3 class="p-2 rounded-title">Tình trạng khắc phục sự vụ</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Tình trạng khắc phục sự vụ:</label>
+                                <div class="col-lg-7">
+                                    <select class="form-control custom-select" name="status" required
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.status">
+                                        <option *ngFor="let item of list_status" [ngValue]="item">{{item.contents}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "formDisciplinaryError.issue_correction_status.status.code == 1"  class="col-md-4" >
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-3">Ngày hoàn thành:</label>
+                                <div class="col-lg-9">
+                                    <input type="date" class="form-control" name="finish_day"
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.finish_day" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf = "formDisciplinaryError.issue_correction_status.status.code != 1"  class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-3">Ngày hoàn thành:</label>
+                                <div class="col-lg-9">
+                                    <input type="date" class="form-control" name="finish_day"
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.finish_day">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Ghi chú:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="note"
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.note">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-4">Chứng từ liên
+                                    quan:</label>
+                                <div class="col-lg-4">
+                                    <input type="file" ng2FileSelect [uploader]="uploader"
+                                        style="display: none" #fileUploader
+                                        accept="application/pdf">
+                                    <button (click)="fileUploader.click()">Tải
+                                        file đính kèm</button>
+                                </div>
+                                <div class="col-lg-4" *ngFor="let item of uploader.queue">
+                                    {{item.file?.name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <button (click)="UploadFile()">Cập nhật File</button>
+                                </div>
+                                <div class="col-lg-8">
+                                    {{this.formDisciplinaryError.issue_correction_status.file_name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-4">Chứng từ liên
+                                    quan:</label>
+                                <div class="col-lg-4">
+                                    <input type="file" ng2FileSelect [uploader]="uploader" style="display: none"
+                                        #fileUploader accept="application/pdf">
+                                    <button (click)="fileUploader.click()">Tải
+                                        file đính kèm</button>
+                                </div>
+                                <div class="col-lg-4" *ngFor="let item of uploader.queue">
+                                    {{item.file?.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success waves-effect waves-light m-r-10" [disabled]="!heroForm.valid"
+        (click)="onSave()">Lưu</button>
+    <button class="btn btn-inverse waves-effect waves-light" (click)="onClose()">Thoát</button>
+</div>

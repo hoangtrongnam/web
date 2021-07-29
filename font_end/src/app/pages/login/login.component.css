@@ -1,0 +1,50 @@
+.input-container {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+  
+.icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+}
+  
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+.my-icon {
+    position: absolute;
+    color: white;
+    background: dodgerblue;
+    min-width: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 1px;
+}
+
+.my-position-relative {
+    position: relative;
+}
+
+.my-input {
+    padding: 10px 10px 10px 50px;
+}
+
+.my-icon-material {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-bottom: -4px;
+}
+
+.btn-danger, .btn-danger.disabled {
+    background: #dc3545;
+    border: 1px solid #dc3545;
+}

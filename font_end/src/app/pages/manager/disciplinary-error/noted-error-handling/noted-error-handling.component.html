@@ -1,0 +1,221 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Quản Lý Lỗi Xử lý kỷ luật</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">LỖI XỬ LÝ KỶ LUẬT</a></li>
+            <li class="breadcrumb-item active">GHI NHẬN LỖI XỬ LÝ KỶ LUẬT</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="mb-0 text-white">GHI NHẬN LỖI XỬ LÝ KỶ LUẬT</h4>
+            </div>
+            <div class="card-body">
+                <form #heroForm="ngForm" class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="p-2 rounded-title">Thông tin ghi nhận</h3>
+                        <hr class="mt-0 mb-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-3">Mã ghi nhận:</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="code" [(ngModel)]="formNotedErrorHandling.code" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-3">Ngày ghi nhận:</label>
+                                    <div class="col-lg-9">
+                                        <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="date_of_record" [(ngModel)]="formNotedErrorHandling.date_of_record" required >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-3">Đơn vị yêu cầu:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control custom-select" name="unit_request" required
+                                            [(ngModel)]="formNotedErrorHandling.unit_request">
+                                            <option *ngFor="let item of list_unit_request" [ngValue]="item">
+                                                {{item.branch_code}}-{{item.branch_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-3">Lỗi</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control custom-select" name="error" required
+                                            [(ngModel)]="formNotedErrorHandling.error">
+                                            <option *ngFor="let item of list_error" [ngValue]="item">
+                                                {{item.code}}-{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-3">Chi tiết:</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="description" [(ngModel)]="formNotedErrorHandling.description" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="p-2 rounded-title">Chi tiết sự vụ</h3>
+                        <!-- <mat-tab-group id="kiemdem" style="margin-top: 10px;">
+                            <mat-tab label="Chi tiết sự vụ"> -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Ngày phát
+                                                        sinh:</label>
+                                                    <div class="col-lg-7">
+                                                        <input type="date" class="form-control" name="date_incurred" [(ngModel)]="formNotedErrorHandling.detail_issue.date_incurred" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Đơn vị phát sinh sự vụ:</label>
+                                                    <div class="col-lg-7">
+                                                        <select class="form-control custom-select" name="unit_incurred" required
+                                                            [(ngModel)]="formNotedErrorHandling.detail_issue.unit_incurred">
+                                                            <option *ngFor="let item of list_unit_incurred" [ngValue]="item">
+                                                                {{item.branch_code}}-{{item.branch_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Nguồn cung cấp tin:</label>
+                                                    <div class="col-lg-7">
+                                                        <input type="text" class="form-control" name="news_sources" [(ngModel)]="formNotedErrorHandling.detail_issue.news_sources" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Mã CIF KH liên quan:</label>
+                                                    <div class="col-lg-7">
+                                                        <input type="text" class="form-control" name="cif_customer" 
+                                                        [(ngModel)]="formNotedErrorHandling.detail_issue.cif_customer" 
+                                                        required
+                                                        (ngModelChange)="onRetrieveCustomerRefDataMgmt(formNotedErrorHandling.detail_issue.cif_customer)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Họ tên khách hàng:</label>
+                                                    <div class="col-lg-7">
+                                                        <input type="text" class="form-control" name="full_name_customer" 
+                                                        [(ngModel)]="formNotedErrorHandling.detail_issue.full_name_customer">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Số tiền liên quan:</label>
+                                                    <div class="col-lg-7">
+                                                        <input currencyMask class="form-control" name="amount_involved" [(ngModel)]="formNotedErrorHandling.detail_issue.amount_involved" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="control-label text-right col-lg-5">Số tiền tổn thất:</label>
+                                                    <div class="col-lg-7">
+                                                        <input currencyMask class="form-control" name="loss_of_money" [(ngModel)]="formNotedErrorHandling.detail_issue.loss_of_money" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="mt-0 mb-5">
+                                    <h5>Thông tin CBNV liên quan</h5>
+                                    <div class="col-md-6 row">
+                                        <input class="col-md-6 form-control" type="text" [(ngModel)]="_user.user_id"
+                                            name="user_id">
+                                        <button class="col-md-5 form-control"
+                                            (click)="getHrInfoUser()">Search</button>
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover no-wrap"
+                                            style="border-collapse: inherit;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 70px;">STT</th>
+                                                    <th style="width: 300px;">Mã nhận viên</th>
+                                                    <th style="width: 300px;">Họ tên</th>
+                                                    <th style="width: 300px;">Chức danh</th>
+                                                    <th style="width: 300px;">Hình thức xữ lý kỷ luật</th>
+                                                    <th style="width: 300px;">Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="jsgrid-alt-row"
+                                                    *ngFor="let item of formNotedErrorHandling.detail_issue.staff_form_of_discipline;index as i">
+                                                    <td style="width: 70px;text-align: center;">{{1 + i}}</td>
+                                                    <td style="width: 300px;text-align: center;">{{item.staff.user_code}}
+                                                    </td>
+                                                    <td style="width: 300px;text-align: center;">{{item.staff.full_name}}
+                                                    </td>
+                                                    <td style="width: 300px;text-align: center;">{{item.staff.titlee}}
+                                                    </td>
+                                                    <td style="width: 300px;text-align: center;">
+                                                        <select class="form-control custom-select" name="form_of_discipline" required
+                                                            [(ngModel)]="item.form_of_discipline">
+                                                            <option *ngFor="let item of list_form_of_discipline" [ngValue]="item">
+                                                                {{item.form_of_discipline}}</option>
+                                                        </select>
+                                                        <!-- <mat-checkbox [(ngModel)]="item.conduct_transactione"
+                                                            [ngModelOptions]="{standalone: true}"></mat-checkbox> -->
+                                                    </td>
+                                                    <td style="width: 300px;text-align: center;">
+                                                        <button (click) = "removeItemUser(item)"></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    <hr>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn btn-success" (click)="onSubmit()"  [disabled]="!heroForm.valid">Lưu</button>
+                                        <button type="button" class="btn btn-inverse" (click)="onBack()">Màn hinh quản
+                                            lý</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,218 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Quản Lý Lỗi Xử lý kỷ luật</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">LỖI XỬ LÝ KỶ LUẬT</a></li>
+            <li class="breadcrumb-item active">DUYỆT GHI NHẬN LỖI XỬ LÝ KỶ LUẬT</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="mb-0 text-white">DUYỆT GHI NHẬN LỖI XỬ LÝ KỶ LUẬT</h4>
+            </div>
+            <div class="card-body">
+                <form action="#" class="form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Ngày ghi nhận:</label>
+                                    <div class="col-lg-7">
+                                        <input type="date" class="form-control" name="date_of_record" [(ngModel)]="formNotedErrorHandling.date_of_record"  placeholder="dd/mm/yyyy">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Trạng thái duyệt:</label>
+                                    <div class="col-lg-7">
+                                        <select class="form-control custom-select" name="approved"
+                                            [(ngModel)]="formNotedErrorHandling.approved">
+                                            <option *ngFor="let item of list_status_approved" [ngValue]="item">
+                                                {{item.contents}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-lg-5">Đơn vị phát sinh:</label>
+                                    <div class="col-lg-7">
+                                        <select class="form-control custom-select" name="unit_incurred"
+                                            [(ngModel)]="formNotedErrorHandling.detail_issue.unit_incurred">
+                                            <option [ngValue]="branch">Tất Cả</option>
+                                            <option *ngFor="let item of list_unit_incurred" [ngValue]="item">
+                                                {{item.branch_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label class="control-label text-right col-lg-5"></label>
+                                    <div class="col-md-offset-6 col-md-6">
+                                        <button (click)="onSubmitSearch()" class="btn btn-success">Tìm Kiếm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <form action="#" class="form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <h3 class="p-2 rounded-title">Danh sách Lỗi xử lý kỷ luật</h3>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="submit" class="btn btn-danger" (click)="onSave()">Lưu duyệt lỗi xử lý kỷ
+                                    luật</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover no-wrap"
+                                        style="border-collapse: inherit;">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="5">Thông tin ghi nhận</th>
+                                                <th colspan="5">Chi tiết sự vụ</th>
+                                                <!-- <th colspan="4" rowspan="2">CBNV liên quan</th> -->
+                                                <th colspan="2">Trạng thái duyệt ghi nhận lỗi</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Mã ghi nhận</th>
+                                                <th>Ngày ghi nhận</th>
+                                                <th>Đơn vị gửi yêu cầu</th>
+                                                <th>Lỗi</th>
+                                                <th>Chi tiết</th>
+
+                                                <th>Ngày sự vụ</th>
+                                                <th>Đơn vị phát sinh sự vụ</th>
+                                                <th>Họ tên khách hàng</th>
+                                                <th>Số tiền liên quan</th>
+                                                <th>Số tiền tổn thất</th>
+
+                                                <!-- <th>Mã nhân viên</th>
+                                                <th>Họ tên</th>
+                                                <th>Chức danh</th>
+                                                <th>Hình thức xử lý kỷ luật</th> -->
+                                                <th>
+                                                    <mat-checkbox (click)="clickAllChecked()" [(ngModel)]="allFlag"
+                                                        [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                                                </th>
+                                                <!-- <th>
+                                                    <mat-checkbox>Chọn Tất Cả</mat-checkbox>
+                                                </th> -->
+                                                <th>Thao Tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of dataTable">
+                                                <td style="text-align: center;">{{item.code}}</td>
+                                                <td style="text-align: center;">{{item.date_of_record | date:
+                                                    'dd/MM/yyyy'}}</td>
+                                                <td style="text-align: center;">{{item.unit_request.branch_name}}</td>
+                                                <td style="text-align: center;">{{item.error.code}}</td>
+                                                <td style="text-align: center;">{{item.description}}</td>
+                                                <td style="text-align: center;">{{item.detail_issue.date_incurred | date: 'dd/MM/yyyy'}}</td>
+                                                <td style="text-align: center;">
+                                                    {{item.detail_issue.unit_incurred.branch_name}}</td>
+                                                <td style="text-align: center;">{{item.detail_issue.full_name_customer}}
+                                                </td>
+                                                <td style="text-align: center;">{{item.detail_issue.amount_involved | currency:' đ '}}
+                                                </td>
+                                                <td style="text-align: center;">{{item.detail_issue.loss_of_money | currency:' đ '}}</td>
+                                                <td style="text-align: center;">
+                                                    <mat-checkbox style="text-align: center;"
+                                                        [checked]="item.approved.flag"
+                                                        [(ngModel)]="item.approved.flag"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <button class="btn btn-success" (click)="view(item)"><i
+                                                            class="fa fa-eye"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin ghi nhận lỗi
+                </h4>
+                <form>
+                    <div class="form-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Mã ghi nhận lỗi:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Đơn vị ghi nhận:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Ngày ghi nhận:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Mảng nghiệp vụ:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Nhóm lỗi</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Chi tiết</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">CBNV ghi nhận:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Thời hạn khắc phục:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Nhóm nghiệp vụ:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Lỗi:</label>
+                                <input class="form-control col-md-8" placeholder="Nhập thông tin">
+                            </div>
+                        </div>
+                        <h3 class="p-2 rounded-title mt-4">Address</h3>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,122 @@
+<div class="modal-header">
+    <h4 class="modal-title">Thêm Lỗi Chi Tiết</h4>
+    <button type="button" class="close" (click)="onClose()" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+</div>
+<div mat-dialog-content>
+    <form #heroForm="ngForm" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-5">Mã - Tên Mảng nghiệp vụ</label>
+            <select class="form-control col-7" name="business_segment" required
+                [(ngModel)]="business_segments"
+                (ngModelChange)="onSelectBusinessSegment($event, business_segments)">
+                <option *ngFor="let item of BusinessSegment" [ngValue]="item">{{item.code}} - {{item.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Mã - Tên Nhóm nghiệp vụ</label>
+            <select class="form-control col-7" name="professional_group" required
+                [(ngModel)]="professional_groups"
+                (ngModelChange)="onSelectProfessionalGroup($event, professional_groups)">
+                <option *ngFor="let item of ProfessionalGroup" [ngValue]="item">{{item.code}} - {{item.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Mã - Tên Nhóm lỗi</label>
+            <select class="form-control col-7" name="error_group" required
+                [(ngModel)]="formDetailsError.error_group">
+                <option *ngFor="let item of GroupError" [ngValue]="item">{{item.code}} - {{item.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Mã lỗi chi tiết</label>
+            <input class="form-control col-7" name="code" required [(ngModel)]="formDetailsError.code">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Lỗi chi tiết</label>
+            <input class="form-control col-7" required name="name" [(ngModel)]="formDetailsError.name">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Xếp loại lỗi</label>
+            <select class="form-control col-7" name="rank_errors" required [(ngModel)]="formDetailsError.rank_errors">
+                <option value="Cao">Cao</option>
+                <option value="Trung bình">Trung bình</option>
+                <option value="Thấp">Thấp</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Cấm vi phạm</label>
+            <select class="form-control col-7" name="violate" required [(ngModel)]="formDetailsError.violate">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5"> Nhắc nhở (áp dụng tính điểm trừ theo cơ chế tính điểm tuân thủ)</label>
+            <input class="form-control col-7" required name="remind" [(ngModel)]="formDetailsError.remind">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Phê bình (áp dụng phê bình toàn Vùng bằng VB thông báo) </label>
+            <input class="form-control col-7" required name="criticize" [(ngModel)]="formDetailsError.criticize">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Cảnh cáo (áp dụng bị hạ bậc đánh giá KPI)</label>
+            <input class="form-control col-7" required name="warning" [(ngModel)]="formDetailsError.warning">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-5">Khiển trách</label>
+            <input class="form-control col-7" required name="reprimand" [(ngModel)]="formDetailsError.reprimand">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Cách chức</label>
+            <input class="form-control col-7" required name="dismissed" [(ngModel)]="formDetailsError.dismissed">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Sa thải</label>
+            <input class="form-control col-7" required name="lay_off" [(ngModel)]="formDetailsError.lay_off">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Phương pháp xử lý điều chỉnh</label>
+            <input class="form-control col-7" required name="adjustable_processing_method" [(ngModel)]="formDetailsError.adjustable_processing_method">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Hình thức xử lý vi phạm chuẩn (standard)</label>
+            <input class="form-control col-7" required name="standard_processing_process" [(ngModel)]="formDetailsError.standard_processing_process">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Đình chỉ công việc để xác minh làm rõ</label>
+            <mat-checkbox [(ngModel)]="formDetailsError.suspend_work_to_verify_clarification" [ngModelOptions]="{standalone: true}"> </mat-checkbox>
+            <label class="control-label col-5">Thuộc phạm vi Chuẩn mực đạo đức và Nguyên tắc Ứng xử</label>
+            <mat-checkbox [(ngModel)]="formDetailsError.within_the_permitted_range" [ngModelOptions]="{standalone: true}"> </mat-checkbox>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Tỷ trọng đánh giá Theo cấu phần</label>
+            <input class="form-control col-7" type="number" required name="proportion_of_assessment_by_component" [(ngModel)]="formDetailsError.proportion_of_assessment_by_component">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Tỷ trọng đánh giá Theo mảng</label>
+            <input class="form-control col-7" type="number" required name="proportion_of_assessment_in_the_array" [(ngModel)]="formDetailsError.proportion_of_assessment_in_the_array">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Kết quả giám sát theo ngày/tháng (Tình trạng lỗi = Chưa khắc phục-Trong hạn)</label>
+            <input class="form-control col-7" type="number" required name="monitoring_results" [(ngModel)]="formDetailsError.monitoring_results">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Theo dõi khắc phục (Tình trạng lỗi = Chưa khắc phục-Quá hạn)</label>
+            <input class="form-control col-7" type="number" required name="tracking_remedy" [(ngModel)]="formDetailsError.tracking_remedy">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Tình Trạng</label>
+            <select class="form-control col-7" name="is_actived" required [(ngModel)]="formDetailsError.is_actived">
+                <option value="1">Active</option>
+                <option value="0">DeActive</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" [disabled]="!heroForm.valid"
+        (click)="onSave()">Lưu</button>
+    <button type="submit" class="btn btn-inverse waves-effect waves-light" (click)="onClose()">Thoát</button>
+</div>

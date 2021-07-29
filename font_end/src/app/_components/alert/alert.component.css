@@ -1,0 +1,13 @@
+.my-alert-danger{
+    box-shadow: none;
+    border: 1px solid #f25961;
+    border-left: 4px solid #f25961;
+    background-color: #f8d7da;
+}
+
+.my-alert-success{
+    box-shadow: none;
+    border: 1px solid #31ce36;
+    border-left: 4px solid #31ce36;
+    background-color: #d4edda;
+}

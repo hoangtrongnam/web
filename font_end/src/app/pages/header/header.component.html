@@ -1,0 +1,75 @@
+<!-- Topbar header -->
+<!-- <header class="topbar"> -->
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <!-- Logo -->
+        <div class="navbar-header bg-light">
+            <a class="navbar-brand" routerLink="/">
+                <b>
+                    <img src="./assets/images/favicon.ico" alt="logo" class="img-fluid d-none d-inline-block d-xl-none" />
+                </b>
+                <span>
+                    <img src="./assets/images/logo.svg" alt="logo" style="height: 70px;" class="img-fluid d-none d-xl-inline-block" />
+                </span>
+            </a>
+        </div>
+        <!-- End Logo -->
+
+        <div class="navbar-collapse">
+            <!-- toggle and nav items -->
+            <ul class="navbar-nav mr-auto mt-md-0">
+                <!-- Button Sidebar -->
+                <li class="nav-item">
+                    <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
+                        <i class="mdi mdi-menu"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)">
+                        <i class="ti-menu"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <div style="font-size: 15px; font-weight: 500;" class="nav-link hidden-sm-down text-white text-uppercase" href="javascript:void(0)">
+                        QUẢN LÝ LỖI TUÂN THỦ
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav my-lg-0">
+                <!-- Language -->
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i [ngClass]="translate.currentLang == 'vi' ? languageList.vi.class : languageList.en.class"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right scale-up">
+                        <a (click)="onChangeLanguage(item.key)" class="dropdown-item" href="javascript:void(0)" *ngFor="let item of languageList | keyvalue" >
+                            <i [ngClass]="item.value.class"></i> {{item.value.name}}
+                        </a>
+                    </div>
+                </li> -->
+                <!-- End Language -->
+                <li class="nav-item">
+                    <div class="nav-link nav-toggler text-white" style="font-size: 15px;font-weight: 500;" href="javascript:void(0)">
+                        <strong class="say-hello" style="font-style: italic;color:rgb(239, 248, 105)">Xin chào... </strong>  {{currentUser?.fullname}}
+                    </div>
+                </li>
+                <!-- Profile -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-warning btn-circle btn-sm p-1 text-uppercase">{{(currentUser?.username).charAt(0)}}</button>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right scale-up">
+                        <ul class="dropdown-user">
+                            <li><a><i class="ti-user"></i> {{currentUser?.username}}</a></li>
+                            <li><a><i class="ti-email"></i> {{currentUser?.email}}</a></li>
+                            <li><a><i class="ti-briefcase"></i> {{currentUser?.branch.name}} ({{currentUser?.branch.code}})</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" (click)="logout()"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- End Profile -->
+            </ul>
+        </div>
+    </nav>
+<!-- </header> -->

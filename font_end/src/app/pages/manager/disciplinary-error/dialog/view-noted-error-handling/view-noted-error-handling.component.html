@@ -1,0 +1,288 @@
+<div class="modal-header">
+    <h4 class="modal-title">Chi Tiết</h4>
+    <button type="button" class="close" (click)="onClose()" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+</div>
+<div mat-dialog-content>
+    <form #heroForm="ngForm" class="form-horizontal">
+        <div class="form-body">
+            <h3 class="p-2 rounded-title">Thông tin ghi nhận</h3>
+            <hr class="mt-0 mb-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Mã ghi nhận:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="code" [(ngModel)]="formDisciplinaryError.code"
+                                disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Ngày ghi nhận:</label>
+                        <div class="col-lg-9">
+                            <input type="datetime-local" class="form-control" name="date_of_record"
+                                [(ngModel)]="formDisciplinaryError.date_of_record" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Đơn vị yêu cầu:</label>
+                        <div class="col-lg-9">
+                            <select class="form-control custom-select" name="unit_request" disabled
+                                [(ngModel)]="formDisciplinaryError.unit_request">
+                                <option [ngValue]="formDisciplinaryError.unit_request">
+                                    {{formDisciplinaryError.unit_request.branch_code}}-{{formDisciplinaryError.unit_request.branch_name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Lỗi</label>
+                        <div class="col-lg-9">
+                            <select class="form-control custom-select" name="error" disabled
+                                [(ngModel)]="formDisciplinaryError.error">
+                                <option [ngValue]="formDisciplinaryError.error">
+                                    {{formDisciplinaryError.error.code}}-{{formDisciplinaryError.error.name}}</option>
+                                <option *ngFor="let item of list_error" [ngValue]="item">
+                                    {{item.code}}-{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label text-right col-lg-3">Chi tiết:</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="description"
+                                [(ngModel)]="formDisciplinaryError.description" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="p-2 rounded-title">Chi tiết sự vụ</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Ngày phát
+                                    sinh:</label>
+                                <div class="col-lg-7">
+                                    <input type="datetime-local" class="form-control" name="date_incurred"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.date_incurred" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Đơn vị phát sinh sự vụ:</label>
+                                <div class="col-lg-7">
+                                    <select class="form-control custom-select" name="unit_incurred" disabled
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.unit_incurred">
+                                        <option [ngValue]="formDisciplinaryError.detail_issue.unit_incurred">
+                                            {{formDisciplinaryError.detail_issue.unit_incurred.branch_code}}-{{formDisciplinaryError.detail_issue.unit_incurred.branch_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Nguồn cung cấp tin:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="news_sources"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.news_sources" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Mã CIF KH liên quan:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="cif_customer"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.cif_customer" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Họ tên khách hàng:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="full_name_customer"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.full_name_customer" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Số tiền liên quan:</label>
+                                <div class="col-lg-7">
+                                    <input currencyMask class="form-control" name="amount_involved"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.amount_involved" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Số tiền tổ thất:</label>
+                                <div class="col-lg-7">
+                                    <input currencyMask class="form-control" name="loss_of_money"
+                                        [(ngModel)]="formDisciplinaryError.detail_issue.loss_of_money" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-5">
+                <h5>Thông tin CBNV liên quan</h5>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover no-wrap"
+                        style="border-collapse: inherit;">
+                        <thead>
+                            <tr>
+                                <th style="width: 70px;">STT</th>
+                                <th style="width: 300px;">Mã nhận viên</th>
+                                <th style="width: 300px;">Họ tên</th>
+                                <th style="width: 300px;">Chức danh</th>
+                                <th style="width: 300px;">Hình thức xử lý kỷ luật</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="jsgrid-alt-row"
+                                *ngFor="let item of formDisciplinaryError.detail_issue.staff_form_of_discipline;index as i">
+                                <td style="width: 70px;text-align: center;">{{1 + i}}</td>
+                                <td style="width: 300px;text-align: center;">{{item.staff.user_code}}
+                                </td>
+                                <td style="width: 300px;text-align: center;">{{item.staff.full_name}}
+                                </td>
+                                <td style="width: 300px;text-align: center;">{{item.staff.titlee}}
+                                </td>
+                                <td style="width: 300px;text-align: center;">
+                                    {{item.form_of_discipline.form_of_discipline}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h3 class="p-2 rounded-title">Tình trạng xử lý kỷ luật</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Tình trạng XLKL:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="disciplinary_status" disabled
+                                        [(ngModel)]="formDisciplinaryError.disciplinary_status.status.contents">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Ghi chú XLKL:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="disciplinary_status_note"
+                                        [(ngModel)]="formDisciplinaryError.disciplinary_status.note" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Số văn bản:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="doc_code"
+                                        [(ngModel)]="formDisciplinaryError.disciplinary_status.document.code"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Ngày văn bản:</label>
+                                <div class="col-lg-7">
+                                    <input type="datetime-local" class="form-control" name="release_date"
+                                        [(ngModel)]="formDisciplinaryError.disciplinary_status.document.release_date"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Tên đơn vị ban hành:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="issuing_unit"
+                                        [(ngModel)]="formDisciplinaryError.disciplinary_status.document.issuing_unit" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="p-2 rounded-title">Tình trạng khắc phục sự vụ</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Tình trạng khắc phục sự vụ:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="status" disabled
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.status.contents">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-3">Ngày hoàn thành:</label>
+                                <div class="col-lg-9">
+                                    <input type="datetime-local" class="form-control" name="finish_day"
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.finish_day" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-5">Ghi chú:</label>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" name="note"
+                                        [(ngModel)]="formDisciplinaryError.issue_correction_status.note" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-lg-4">Chứng từ liên
+                                    quan:</label>
+                                <div class="col-lg-8">
+                                    {{this.formDisciplinaryError.issue_correction_status.file_name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-inverse waves-effect waves-light" (click)="onClose()">Thoát</button>
+</div>

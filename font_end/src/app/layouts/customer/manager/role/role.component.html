@@ -1,0 +1,112 @@
+﻿<style>
+#abc-table {
+width: auto !important;
+}
+</style>
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Hệ thống phân quyền</h3>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="col-12" style="padding-left:15px">
+                            <select [ngModel]="dataRoleSource.selectRoleId" (ngModelChange)="selectedRole($event)" class="custom-select">
+                                <option *ngFor="let p of dataRoleSource.data" [value]="p.id">{{p.name}} ({{p.description}})</option>
+                            </select>
+                            <div class="col-md-offset-3 pull-right" style="margin-bottom: 20px;">
+                                    <button type="button" class="btn btn-success" (click)="onSaveAuth()">Cập nhật</button>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive m-t-20">
+                        <div class="form-material col-lg-12">
+                            <div class="form-body row">
+                                <div class="col-12">
+                                    <div class="card" style="min-height: 550px">
+                                        <div class="card-body inbox-panel collapse-arrow">
+                                            <h4 class="card-title">Danh sách menu</h4>
+                                            <div id="slimMenu" class="form-material">
+                                                <div class="table-responsive m-t-20">
+                                                    <table id="menuHead" class="table table-bordered table-hover table-striped footable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="max-width: 280px"><div style="width: 280px">Menu</div></th>
+                                                                <th style="max-width: 180px" *ngFor="let data of this.dataPermitSource.data" ><div style="width: 180px;text-align: center;">{{data.name}}</div></th>
+                                                                <!-- <th style="width: 180px; text-align: center;">Cập nhật</th> -->
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                    <mat-tree #treeMenu [dataSource]="dataMenuSource" [treeControl]="treeMenuControl" [ngStyle]="{'width': (widthMenu + 'px')}">
+                                                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                                                <div [ngStyle]="{'width': (widthMenu + 'px')}">
+                                                                    <div class="comment-widgets row">
+                                                                        <div class="row comment-row" style="padding: unset;height: 47.9px;">
+                                                                            <div>
+                                                                                <table>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                    <div [ngStyle]="{'width': ((280 - ((node.level - 1) * 40)) + 'px')}">
+                                                                                                            <button mat-icon-button disabled></button>
+                                                                                                            <mat-checkbox class="checklist-leaf-node"
+                                                                                                                            [checked]="checklistMenuSelection.isSelected(node)"
+                                                                                                                            (change)="todoLeafItemMenuSelectionToggle(node, $event)"> {{node.name}}</mat-checkbox>
+                                                                                                    </div>
+                                                                                            </td>
+                                                                                            <td *ngFor="let permit of node.permits">
+                                                                                                    <div class="d-flex justify-content-center" style="width: 180px">
+                                                                                                        <mat-checkbox [disabled]="!node.isSelected ? 'disabled': null" class="checklist-leaf-node" [(ngModel)]="permit.isSelected"> </mat-checkbox>
+                                                                                                    </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </mat-tree-node>
+                                                            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                                                                <button mat-icon-button matTreeNodeToggle
+                                                                        [attr.aria-label]="'toggle ' + node.filename">
+                                                                    <mat-icon class="mat-icon-rtl-mirror">
+                                                                    {{treeMenuControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                                                    </mat-icon>
+                                                                </button>
+                                                                <mat-checkbox [checked]="descendantsAllMenuSelected(node)"
+                                                                                [indeterminate]="descendantsPartiallyMenuSelected(node)"
+                                                                                (change)="todoItemMenuSelectionToggle(node)">{{node.name}}</mat-checkbox>
+                                                                
+                                                            </mat-tree-node>
+                                                        </mat-tree>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

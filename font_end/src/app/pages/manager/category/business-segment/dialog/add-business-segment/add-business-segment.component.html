@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h4 class="modal-title">THÊM MẢNG NGHIỆP VỤ</h4>
+    <button type="button" class="close" (click)="onClose()" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+</div>
+<div mat-dialog-content>
+    <form #heroForm="ngForm" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-5">Khối - Đơn vị</label>
+            <select class="form-control col-7" name="branch" required [(ngModel)]="formMajor.branch">
+                <option *ngFor="let item of Branch" [ngValue]="item">{{item.branch_code}} - {{item.branch_name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Mã Mảng nghiệp vụ</label>
+            <input class="form-control col-7" name="code" required [(ngModel)]="formMajor.code">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Tên Mảng nghiệp vụ</label>
+            <input class="form-control col-7" required name="name" [(ngModel)]="formMajor.name">
+        </div>
+        <div class="form-group">
+            <label class="control-label col-5">Tình Trạng</label>
+            <select class="form-control col-7" name="is_actived" required [(ngModel)]="formMajor.is_actived">
+                <option value="1">Active</option>
+                <option value="0">DeActive</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"  [disabled]="!heroForm.valid" (click)="onSave()">Lưu</button>
+    <button type="submit" class="btn btn-inverse waves-effect waves-light" (click)="onClose()">Thoát</button>
+</div>

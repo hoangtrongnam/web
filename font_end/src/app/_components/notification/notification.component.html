@@ -1,0 +1,8 @@
+<div class="my-notifications col-10 col-xs-11 col-sm-4">
+    <div *ngFor="let notification of notifications" class="{{notification.cssClass}}" role="alert">
+        <button type="button" (click)="close(notification)" aria-hidden="true" class="close my-noti-button-close">×</button>
+        <span data-notify="icon" class="fa fa-bell"></span> 
+        <span data-notify="title">{{ notification.title }}</span> 
+        <span data-notify="message">{{ notification.message }}</span>
+    </div>
+</div>
